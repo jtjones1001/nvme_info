@@ -1,0 +1,10 @@
+{
+  "filter": [
+    "Host Memory Buffer Preferred Size (HMPRE)",
+    "Host Memory Buffer Minimum Size (HMMIN)",
+    "Host Memory Buffer Size (HSIZE)",
+    "Host Memory Descriptor List Address (HMDLAL)",
+    "Host Memory Descriptor List Address (HMDLAU)",
+    "Host Memory Descriptor List Entry Count (HMDLEC)"
+  ]
+}

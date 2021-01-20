@@ -1,0 +1,42 @@
+{
+	"filter": [
+
+		"Critical Warnings",
+		"Available Space Below Threshold",
+		"Temperature Over/Under Threshold",
+		"Reliability Degraded",
+		"Media in Read Only",
+		"Volatile Backup Failed",
+		"Available Spare",
+		"Available Spare Threshold",
+		"Percentage Used",
+		"Data Units Read",
+		"Data Read",
+		"Data Units Written",
+		"Data Written",
+		"Host Read Commands",
+		"Host Write Commands",
+		"Controller Busy Time",
+		"Power Cycles",
+		"Power On Hours",
+		"Unsafe Shutdowns",
+		"Media and Data Integrity Errors",
+		"Number of Error Information Log Entries",
+
+		"Composite Temperature",
+		"Temperature Sensor 1",
+		"Temperature Sensor 2",
+		"Temperature Sensor 3",
+		"Temperature Sensor 4",
+		"Temperature Sensor 5",
+		"Temperature Sensor 6",
+		"Temperature Sensor 7",
+		"Temperature Sensor 8",
+		"Warning Composite Temperature Time",
+		"Critical Composite Temperature Time",
+		"Thermal Management Temperature 1 Count",
+		"Thermal Management Temperature 2 Count",
+		"Thermal Management Temperature 1 Time",
+		"Thermal Management Temperature 2 Time"
+	]
+}

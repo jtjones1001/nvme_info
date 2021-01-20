@@ -1,0 +1,391 @@
+/*------------------------------------------------------------------------------------------------------------------------------------------
+// NVMe Info - electron GUI front end for nvme command line utility - Style sheet
+//------------------------------------------------------------------------------------------------------------------------------------------
+// Copyright(c) 2021 Joseph Jones
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
+// files(the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, 
+// merge, publish, distribute, sublicense, and /or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions :
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
+// IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//------------------------------------------------------------------------------------------------------------------------------------------*/
+html{box-sizing:border-box}
+ 
+*, *::after, *::before {
+    box-sizing:inherit;
+	-webkit-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-app-region: no-drag;
+}
+.titlebar, .titlebar > * { color: white; }
+
+:root {
+    --menu-height: 30px;
+    --sidebar-width:  160px;
+    --sidebar-icon-width: 50px;
+    --line-height: 30px;
+    --vertical-padding: 15px;
+    --left-padding: 8px;
+    --border-radius: 4px;
+    --min-page-width: 1150px;
+  
+    --good-color:  rgb(94, 225, 94);
+    --suspect-color: rgb(255, 221, 30);
+    --poor-color:  rgb(255, 138, 138);
+
+    --pass-color: rgb(170, 216, 170);
+    --warn-color: rgb(255, 255, 183);
+    --warn-active: rgb(255, 251, 145);
+    --fail-color: rgb(255, 150, 150);
+
+    --text-darkblue: rgb(13, 47, 70);
+    --text-medblue: rgb(62, 89, 109);
+    --text-darkgrey:rgb(16, 16, 16);
+    --text-medgray: rgb(64, 64, 64);
+
+    --table-header-bg: rgb(163, 163, 163);
+    --table-border:  rgb(214, 214, 214);
+    --dashboard-header-bg:rgb(208, 208, 208);
+
+    --shadow-color:  rgb(128,128,128);
+    --light-grey:rgb(233, 233, 233);   
+    --medgray-transparent: rgba(126, 126, 126,0.2);
+
+    --sidebar-bgcolor: rgb(249,249,249);
+    --hover-bg: rgb(240, 240, 236);
+
+    --disable-text-color: rgb(137, 164, 167);
+    --disable-bg-color: rgb(128, 128, 128);
+/*
+    --med-bgcolor: #87b6c7;
+    --med-bgcolor2: rgba(10, 47, 92, 0.4);
+*/
+    --med-bgcolor: #7babbd;
+    --med-bgcolor2: rgb(114, 145, 181);
+ 
+    --dark-color: #0c4080;  /* Also used for the title but must be hard-coded: #0c4080; */
+    --darkblue:  rgba(12,64,128); 
+    --darkestblue-transparent: rgba(15, 72, 111,0.75);
+    --darkestblue: rgba(15, 72, 111,1);
+}
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: Verdana, sans-serif;
+  font-size: 12px;
+  border: none;
+}
+/* Side navigation bar      */
+/* ------------------------- */
+ .sidebar {
+  display: block;  
+  position: fixed; 
+  top: var(--menu-height); 
+  left:  0; 
+  bottom: 0; 
+  width: var(--sidebar-width);
+  box-shadow: 1px 0 2px var(--shadow-color);
+  background-color: var(--sidebar-bgcolor);
+  z-index: 1;
+}
+.sidebar-item { 
+  display :block; 
+  width: calc( var(--sidebar-width) - 20px);
+  margin:  10px 10px 20px 10px; 
+  padding: 10px 20px;
+  outline: none;
+  text-decoration: none;
+  cursor: default ;  
+  background-color: transparent;
+  border-radius: var(--border-radius);
+  color: var(--text-medblue);
+  font-weight: 500;
+}
+.icon-div {
+  display: inline-block; position: absolute; left: 0; bottom: 0; width: var(--sidebar-width);
+  padding: 0px 5px;
+  background-color: var(--light-grey);
+  box-shadow: 0 1px 2px rgb(217, 217, 217) inset;
+
+}
+.sb-icon-button {
+  float: left;
+  width: var(--sidebar-icon-width);
+  height: var(--line-height);
+  line-height: var(--line-height);
+  border: none;
+  outline:  none;
+  border-radius: var(--border-radius);
+  background-color: transparent;
+  color: var(--text-medblue);
+  font-size: 14px;
+}
+.sb-icon-button:hover,.sb-icon-button:active,  .sidebar-item:hover { 
+ background-color:  var(--medgray-transparent); color: var(--text-darkblue);
+} 
+.sidebar-active:hover, .sidebar-item:active { 
+  background-color:  var(--darkestblue-transparent)!important; color:white!important;
+} 
+.sidebar-active, .sidebar-active:active { 
+  background-color:  var(--darkestblue)!important;  color: white!important;
+} 
+/*---------------------------------------------------------------------
+/ Table settings                    
+/ --------------------------------------------------------------------*/
+table {
+    display: table;     
+    width:auto;
+    border-radius: var(--border-radius); 
+    box-shadow: 0 0px 2px var(--shadow-color); 
+    background-color: white; 
+    vertical-align:top;   
+    border-collapse: separate; 
+    border-spacing: 0;
+    text-align: left;
+}
+.db-table,.db-inline-table {
+    margin: 15px 20px 15px 15px; 
+    box-shadow: 2px 2px 2px var(--shadow-color); 
+}
+.db-th, .db-inline-th { 
+    font-weight: bolder; 
+    color: var(--text-darkgrey); 
+    text-align:left; 
+    padding: 8px 8px 8px 8px;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    background-color: var(--dashboard-header-bg);
+    user-select: text;
+}
+.db-inline-table-col1, .db-inline-table-col2,
+.db-table-col1, .db-table-col2 { 
+    color: var(--text-darkgrey); 
+    padding: 5px 5px 5px 10px;
+    user-select: text;
+}
+th:first-child                { border-top-left-radius: var(--border-radius);}
+th:last-child                 { border-top-right-radius: var(--border-radius);}
+tr:last-child td:first-child  { border-bottom-left-radius: var(--border-radius);}
+tr:last-child td:last-child   { border-bottom-right-radius: var(--border-radius);}
+
+.results-table {
+    display: none;
+    font-size: 11px;
+    margin-bottom: 15px;
+    box-shadow: 2px 2px 2px var(--shadow-color); 
+}
+.results-table th {
+    position:sticky; top: -3px;
+    background-color:  var(--table-header-bg);
+    padding: 10px 8px 8px 8px;  
+    color: var(--text-darkgrey); 
+    user-select: text;
+}
+  .results-table td {
+    padding: 6px 8px;
+    border-top: 1px solid var(--table-border);
+    color: var(--text-darkgrey); 
+    user-select: text;
+}
+.results-table tr:last-child {border: 1px solid var(--table-border);}
+.results-table th:first-child {border-left: 1px solid var(--table-border);}
+.results-table td:first-child {border-left: 1px solid var(--table-border);}
+.results-table tr:first-child td {border-top: 0px solid var(--table-border);}
+
+.db-table      { width: 550px; display:block;}
+.db-table-col1 { width: 150px;}
+.db-table-col2 { width: 400px;}
+
+.db-inline-table      { width: 340px; display:inline-block;}
+.db-inline-table-col1 { width: 215px;}
+.db-inline-table-col2 { width: 125px;}
+
+.dashboard-tables {
+    box-shadow: 0 1px 1px grey inset;
+    padding: 10px;
+    height: 100%;
+    display: block; position: fixed; 
+    top: calc(15px + 45px + var(--menu-height));
+    bottom: 0;
+    left: var(--sidebar-width);
+    right: 0;
+}
+.table-div {
+  display: block; position: fixed; 
+  top: calc(10px + var(--line-height) + var(--line-height) + 45px + 60px + var(--menu-height));
+  bottom: 0;
+  left: var(--sidebar-width);
+  right: 0;
+  padding-left: 20px;
+  padding-right: 10px;
+  overflow-y: scroll;
+}
+/*------------------------------------------------------------------------------------------ 
+  Setup the values for the dashboard page
+-------------------------------------------------------------------------------------------*/
+.page-container { 
+    position: fixed; 
+    top: var(--menu-height); 
+    left: var(--sidebar-width); 
+    bottom: 0; 
+    right: 0; 
+    min-width: var(--min-page-width);
+    background-image: url(white_plaster.png);  /* Background pattern from Toptal Subtle Patterns */
+    overflow-y: scroll; 
+    scrollbar-width: none;  
+}
+.page-container::-webkit-scrollbar { width: 0; height: 0;} /* hide the scroll bar */
+/*---------------------------------------------------------------------
+/ Control lines and drive select option                    
+/ --------------------------------------------------------------------*/
+.top-line,.bottom-line {
+    height:        calc(var(--line-height) + var(--vertical-padding));
+    line-height:   var(--line-height);
+    padding-left:  20px;
+    padding-top:   var(--vertical-padding);
+    background-image: linear-gradient(to right, var(--med-bgcolor2), 500px, var(--med-bgcolor)); 
+}
+.bottom-line { 
+    padding-bottom: var(--vertical-padding);
+    height:  calc( var(--line-height) + 2 * var(--vertical-padding));
+    z-index: 1; 
+    box-shadow: 0 1px 1px var(--shadow-color);
+}
+/*------------------------------------------------------------------------------------------ 
+/  Buttons, selects, texxt input, etc.
+/-------------------------------------------------------------------------------------------*/
+.select-selected, .file-input, .info-search, .btn, .btn-white, .combo-button-left, .combo-button-middle  {
+    float: left;
+    height: var(--line-height);  line-height: var(--line-height);
+    min-width: 110px;  width: auto;
+    border-radius: var(--border-radius);
+    border:none;
+    outline: 0;
+    background-color: white; 
+    color: var(--text-darkblue); 
+    font-family: Verdana, sans-serif;
+    font-size: 12px;  font-weight: 500;
+    cursor: default;
+    text-align: left;
+    user-select:none;
+    margin-right: 20px;
+    padding-left: var(--left-padding);
+}
+ 
+.settings-line  { float:left; display: block; width:100%; margin: 10px 0 ;height: 30px;line-height: 30px }
+.settings-label { display:inline-block; width:180px; }
+.settings-value-readonly, .settings-value { 
+    padding: 0 8px; display:inline-block;width:650px;background:white;border-radius : 4px; border: 1px solid grey  
+}
+.settings-value-readonly { background:lightgray; }
+
+.settings-select {outline: 0; padding: 0 8px; display:inline-block;width:100px;background:white; border-radius: 4px; text-align-last: center;  border: 1px solid grey; height: 30px; line-height: 30px  } 
+
+.btn       { min-width: 80px; text-align: center;   background-color: var(--darkestblue); color: white; } 
+.btn-white { min-width: 50px; text-align: center;} 
+ 
+.btn:active, .btn-active { background-color:  var(--darkestblue)!important;   color: white!important;  }
+
+.combo-button-left   { margin-right: 0px;  text-align: center;  border-top-right-radius: 0px;  border-bottom-right-radius: 0px; }
+.combo-button-middle { margin-right: 0px;  text-align: center;  border-radius: 0px; }
+.combo-select .select-selected { min-width:170px; text-align: center; border-top-left-radius: 0px; border-bottom-left-radius: 0px; }
+
+.info-search     { min-width: 230px; }
+.file-input      { min-width: 500px; }
+.select-selected { min-width: 500px; }
+.settings-value  {min-width: 500px };
+
+::placeholder       { color: var(--text-darkblue); }
+.info-search:focus  { background-color: white!important;}
+.file-input:focus   { background-color:var(--hover-bg)!important;color:var(--darkgrey-text)!important;}
+.file-input.default { user-select:none; background-color:var(--warn-color);}
+.file-input:focus .default { background-color:var(--warn-active)!important; color:var(--darkgrey-text)!important;}
+
+.select-hide     { display: none; }
+.select-selected { margin-right: 0px;}
+.drive-select, .combo-select {
+    float: left;
+    display: inline-block;
+    position: relative;
+    cursor: default;
+    margin-right: 20px;
+}
+.select-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    margin-bottom: 10px;
+    border-radius: var(--border-radius);
+    background: white;
+    box-shadow: 0 0 4px var(--darkestblue);
+    white-space: nowrap;    
+}
+.select-items div {
+    padding-left: var(--left-padding);
+    cursor: default;
+    user-select: none;
+    background: white;
+    color: var(--text-medgray);
+  }
+.select-items div:hover, .btn:hover,.btn:hover.btn-active:hover,
+.combo-button-left.btn-active:hover, .combo-button-middle.btn-active:hover,.select-selected.btn-active:hover  { 
+    background-color:  var(--darkestblue-transparent)!important; 
+    color: white!important; 
+}
+.info-search:hover,.file-input:hover, .combo-button-left:hover,.combo-button-middle:hover,.select-selected:hover {
+    background-color:var(--hover-bg)!important; 
+    color: var(--text-darkgrey)!important;
+}
+.file-input.default:hover  { 
+    user-select:none;
+    background-color: var(--warn-active)!important;
+    color: var(--text-darkgrey)!important;
+}
+.select-disabled,.select-selected.disabled, .select-selected[disabled],
+.combo-button-left.disabled,.combo-button-left[disabled], .combo-button-middle.disabled, .combo-button-middle[disabled],
+.info-search.disabled::placeholder, .info-search[disabled]::placeholder, .info-search.disabled, .info-search[disabled],
+.btn:disabled, .btn[disabled], .btn-white:disabled, .btn-white[disabled]  { 
+  pointer-events: none;
+  border: none; 
+  color:  var(--disable-text-color)!important;
+  background-color: var(--disable-bg-color)!important;
+}
+ .page-banner {
+    position: fixed; 
+    top: calc(5px + 15px + 45px + 60px + var(--menu-height));
+    left: var(--sidebar-width); 
+    right: 0;
+    min-width: 860px;
+    height:  var(--line-height);
+    line-height: var(--line-height);
+    padding-left: var(--left-padding);
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 2px 2px 2px var(--shadow-color); 
+    color: var(--text-darkgrey);
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .error-banner {
+    float: center;
+    margin: 20px;
+    padding: 20px;
+    min-width: 500px;
+    background-color: var(--fail-color);
+    position: fixed;
+    border-radius: var(--border-radius);
+    width: auto;
+    box-shadow: 2px 2px 2px var(--shadow-color); 
+    color: var(--text-darkgrey);
+  }

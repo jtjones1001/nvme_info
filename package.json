@@ -1,0 +1,79 @@
+{
+  "name": "NVMeInfo",
+  "version": "0.9.1",
+  "description": "Displays, compares, and verifies NVMe information",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/electron .",
+    "dist": "electron-builder"
+  },
+  "author": "Joseph Jones",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^11.0.1",
+    "electron-builder": "^22.9.1"
+  },
+  "dependencies": {
+    "custom-electron-titlebar": "^3.2.4",
+    "dateformat": "^3.0.3",
+    "electron-log": "^4.2.4",
+    "electron-unhandled": "^3.0.2",
+    "find-remove": "^2.0.3"
+  },
+  "build": {
+    "appId": "com.epicview.nvmeinfo",
+    "productName": "NVMeInfo",
+    "win": {
+      "target": "dir"
+    },
+    "linux": {
+      "target": "tar.gz"
+    },
+    "asar": true,
+    "extraResources": [
+      {
+        "from": "./nvmecmd/",
+        "to": "./nvmecmd",
+        "filter": [
+          "**/*.*"
+        ]
+      },
+      {
+        "from": "./nvmecmd/",
+        "to": "./nvmecmd",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "./scripts/",
+        "to": "./scripts",
+        "filter": [
+          "**/*.*"
+        ]
+      },
+      {
+        "from": "./resources/view_filters/",
+        "to": "./view_filters",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "./resources/",
+        "to": "./",
+        "filter": [
+          "**/linux_installer.sh"
+        ]
+      },
+      {
+        "from": "./documentation/",
+        "to": "./documentation",
+        "filter": [
+          "**/*.pdf"
+        ]
+      }
+    ]
+  }
+}

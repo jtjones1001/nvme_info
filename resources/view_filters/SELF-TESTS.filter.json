@@ -1,0 +1,29 @@
+{
+  "filter": [
+    "Device Self-test Command",
+    "Extended Device Self-test Time (EDSTT)",
+    "Device Self-test Options (DSTO)",
+    "Current Number Of Self-Tests",
+    "Number Of Failed Self-Tests",
+    "Self-Test 1 Result",
+    "Self-Test 2 Result",
+    "Self-Test 3 Result",
+    "Self-Test 4 Result",
+    "Self-Test 5 Result",
+    "Self-Test 6 Result",
+    "Self-Test 7 Result",
+    "Self-Test 8 Result",
+    "Self-Test 9 Result",
+    "Self-Test 10 Result",
+    "Self-Test 11 Result",
+    "Self-Test 12 Result",
+    "Self-Test 13 Result",
+    "Self-Test 14 Result",
+    "Self-Test 15 Result",
+    "Self-Test 16 Result",
+    "Self-Test 17 Result",
+    "Self-Test 18 Result",
+    "Self-Test 19 Result",
+    "Self-Test 20 Result"
+  ]
+}

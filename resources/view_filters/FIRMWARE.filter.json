@@ -1,0 +1,23 @@
+{
+  "filter": [
+    "Firmware Revision (FR)",
+    "Firmware Slots",
+    "Firmware Active Slot",
+    "Firmware Pending Slot",
+    "Firmware Slot 1 Read Status",
+    "Firmware Slot 1 Revision",
+    "Firmware Slot 2 Revision",
+    "Firmware Slot 3 Revision",
+    "Firmware Slot 4 Revision",
+    "Firmware Slot 5 Revision",
+    "Firmware Slot 6 Revision",
+    "Firmware Slot 7 Revision",
+    "Maximum Time for Firmware Activation (MTFA)",
+    "Firmware Update Granularity (FWUG)",
+    "Firmware Commit and Image Download Commands",
+    "Firmware Activation Without Reset",
+    "Firmware Activation Notices",
+    "Firmware Activation Notices Enable"
+
+  ]
+}

@@ -1,0 +1,10 @@
+{
+	"filter": [
+		"Data Read",
+		"Data Written",
+		"Data Units Read",
+		"Data Units Written",
+		"Host Read Commands",
+		"Host Write Commands"
+	]
+}

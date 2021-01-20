@@ -1,0 +1,19 @@
+{
+  "filter": [
+    "Number of Power States Support (NPSS)",
+    "Autonomous Power State Transition",
+    "Autonomous Power State Transition Enable (APSTE)",
+
+    "Power State 0 Idle Time Prior to Transition (ITPT)",
+    "Power State 1 Idle Time Prior to Transition (ITPT)",
+    "Power State 2 Idle Time Prior to Transition (ITPT)",
+    "Power State 3 Idle Time Prior to Transition (ITPT)",
+    "Power State 4 Idle Time Prior to Transition (ITPT)",
+
+    "Power State 0 Idle Transition Power State (ITPS)",
+    "Power State 1 Idle Transition Power State (ITPS)",
+    "Power State 2 Idle Transition Power State (ITPS)",
+    "Power State 3 Idle Transition Power State (ITPS)",
+    "Power State 4 Idle Transition Power State (ITPS)"
+  ]
+}

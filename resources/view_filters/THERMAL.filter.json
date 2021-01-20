@@ -1,0 +1,16 @@
+{
+  "filter": [
+    "Composite Temperature",
+    "Host Controlled Thermal Management (HCTMA)",
+    "Minimum Thermal Management Temperature (MNTMT)",
+    "Maximum Thermal Management Temperature (MXTMT)",
+    "Thermal Management Temperature 1 (TMT1)",
+    "Thermal Management Temperature 2 (TMT2)",
+    "Warning Composite Temperature Threshold (WCTEMP)",
+    "Critical Composite Temperature Threshold (CCTEMP)",
+    "Thermal Management Temperature 1 Time",
+    "Thermal Management Temperature 2 Time",
+    "Warning Composite Temperature Time",
+    "Critical Composite Temperature Time"
+  ]
+}

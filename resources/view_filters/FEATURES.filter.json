@@ -1,0 +1,24 @@
+{
+  "filter": [
+    "Arbitration Burst (AB)",
+    "Low Priority Weight (LPW)",
+    "Medium Priority Weight (MPW)",
+    "High Priority Weight (HPW)",
+    "Power State (PS)",
+    "Workload Hint (WH)",
+    "Time Limited Error Recovery (TLER)",
+    "Deallocated or Unwritten Logical Block Error Enable (DULBE)",
+    "Volatile Write Cache Enable (WCE)",
+    "Aggregation Time (TIME)",
+    "Aggregation Threshold (THR)",
+    "Disable Normal (DN)",
+    "Telemetry Log Notices",
+    "Firmware Activation Notices",
+    "Namespace Attribute Notices",
+    "SMART/Health Critical Warnings",
+    "Keep Alive Timeout (KATO)",
+    "Thermal Management Temperature 1 (TMT1)",
+    "Thermal Management Temperature 2 (TMT2)",
+    "Non-Operational Power State Permissive Mode Enable (NOPPME)"
+  ]
+}

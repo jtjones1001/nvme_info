@@ -1,0 +1,14 @@
+{
+  "filter": [
+    "Number of Power States Support (NPSS)",
+    "Autonomous Power State Transition",
+    "Non-Operational Power State Permissive Mode",
+    "Non-Operational Power State Permissive Mode Enable (NOPPME)",
+    "Power State 0 Maximum Power (MP)",
+    "Power State 1 Maximum Power (MP)",
+    "Power State 2 Maximum Power (MP)",
+    "Power State 3 Maximum Power (MP)",
+    "Power State 4 Maximum Power (MP)",
+    "Power State 5 Maximum Power (MP)"
+  ]
+}

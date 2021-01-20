@@ -1,0 +1,17 @@
+{
+	"filter": [
+		"OS Location",
+		"PCI Location",
+		"Subsystem Vendor",
+		"Model Number (MN)",
+		"Size",
+		"Firmware Revision (FR)",
+		"Serial Number (SN)",
+		"Critical Warnings",
+		"Media and Data Integrity Errors",
+		"Percentage Used",
+		"Composite Temperature",
+		"Version (VER)",
+		"Highest Version Detected"
+	]
+}

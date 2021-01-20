@@ -1,0 +1,284 @@
+<!------------------------------------------------------------------------------------------------------------------------------------------
+// NVMe Info - electron GUI front end for nvme command line utility
+//------------------------------------------------------------------------------------------------------------------------------------------
+// Copyright(c) 2021 Joseph Jones
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
+// files(the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, 
+// merge, publish, distribute, sublicense, and /or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions :
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
+// IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//-------------------------------------------------------------------------------------------------------------------------------------- -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NVMe Info</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'; style-src 'self' 'unsafe-inline';">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="./css/all.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="sidebar-menu" class="sidebar">
+        <a id="sidebar-dashboard" href="#" class="sidebar-item sidebar-active">DASHBOARD</a>
+        <a id="sidebar-read-info" href="#" class="sidebar-item">READ INFO</a>
+        <a id="sidebar-compare-info" href="#" class="sidebar-item">COMPARE INFO</a>
+        <a id="sidebar-verify-info" href="#" class="sidebar-item">VERIFY INFO</a>
+
+        <div class="icon-div">
+            <button id="settings" class="sb-icon-button"><i class="fas fa-cog"></i></button>
+            <button id="help" class="sb-icon-button"><i class="fas fa-question"></i></button>
+            <button id="app-logs" class="sb-icon-button"><i class="fas fa-fire"></i></button>
+        </div>
+    </div>
+
+    <!-------------------------------- Settings  ---------------------------------------------------------->
+    <div id="settings-container" style="text-align: left;padding:20px;display:none" class="page-container">
+    
+        <div class="settings-line">
+            <div class="settings-label"> Save Logs For </div>
+    
+            <select id="log-delete-days" class="settings-select">
+                <option>1 day </option>
+                <option>3 days </option>
+                <option>10 days </option>
+                <option>30 days </option>
+                <option>Always </option>
+            </select>
+        </div>
+    
+        <div class="settings-line">
+            <div class="settings-label">Log Directory </div>
+            <div id="log-path" class="settings-value"> </div>
+        </div>
+        <div class="settings-line">
+            <div class="settings-label">View Filter Directory </div>
+            <div id="view-filter-path" class="settings-value-readonly"> TBD </div>
+        </div>
+        <!--
+        <p> Application must be restarted for changes to the view filter directory to take effect </p>
+        -->
+
+        <div class="settings-line">
+            <div class="settings-label">nvmecmd Directory </div>
+            <div id="nvmecmd-path" class="settings-value-readonly"> </div>
+        </div> 
+        <div class="settings-line" style="margin-top:50px">
+            <button id="restore-settings" class="btn">DEFAULTS</button>
+        </div>
+
+    </div>
+    <!--------------------- Dashboard Page  -- One line, 2 inline tables, 1 block table ------------------->
+    <div id="dashboard-container"  class="page-container">
+        <div class="bottom-line">
+            <div id="db-drive-info" class="drive-select"> </div>
+        </div>
+
+        <div id="dashboard-tables" style="overflow-y: hidden; display: none" class="dashboard-tables">
+            <table class="db-inline-table">
+                <thead>
+                    <tr>
+                        <th id="db-health" colspan="2" class="db-inline-th"> HEALTH UNKNOWN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="db-inline-table-col1"> Critical Warnings </td>
+                        <td id="db-critical-warnings" class="db-inline-table-col2"> </td>
+                    </tr>
+                    <tr>
+                        <td class="db-inline-table-col1"> Media and Integrity Errors </td>
+                        <td id="db-media-errors" class="db-inline-table-col2"> </td>
+                    </tr>
+                    <tr>
+                        <td class="db-inline-table-col1"> Self-Test Failures </td>
+                        <td id="db-self-tests-errors" class="db-inline-table-col2"> </td>
+                    </tr>
+                    <tr>
+                        <td class="db-inline-table-col1"> Percentage Used </td>
+                        <td id="db-percentage-used" class="db-inline-table-col2"> </td>
+                    </tr>
+                    <tr>
+                        <td class="db-inline-table-col1"> Available Spare</td>
+                        <td id="db-available-spare" class="db-inline-table-col2"> </td>
+                    </tr>
+                    <tr>
+                        <td class="db-inline-table-col1"> Power On Hours</td>
+                        <td id="db-poweron-hours" class="db-inline-table-col2"> </td>
+                    </tr>
+                    <tr>
+                        <td class="db-inline-table-col1"> Data Read</td>
+                        <td id="db-data-read" class="db-inline-table-col2"> </td>
+                    </tr>
+                    <tr>
+                        <td class="db-inline-table-col1"> Data Written</td>
+                        <td id="db-data-written" class="db-inline-table-col2"> </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <table class="db-inline-table">
+                <thead>
+                    <tr>
+                        <th id="db-temp-health" colspan="2" class="db-inline-th"> HEALTH UNKNOWN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="db-inline-table-col1"> Temperature </td>
+                        <td id="db-temperature" class="db-inline-table-col2"> x</td>
+                    </tr>
+                    <tr>
+                        <td id="tmt1" class="db-inline-table-col1"> Minimum Throttle</td>
+                        <td id="db-min-throttle" class="db-inline-table-col2"> x</td>
+                    </tr>
+                    <tr>
+                        <td id="tmt2" class="db-inline-table-col1"> Medium Throttle</td>
+                        <td id="db-med-throttle" class="db-inline-table-col2"> x</td>
+                    </tr>
+                    <tr>
+                        <td id="twarn" class="db-inline-table-col1"> Heavy Throttle</td>
+                        <td id="db-hi-throttle" class="db-inline-table-col2">x </td>
+                    </tr>
+                    <tr>
+                        <td id="tcrit" class="db-inline-table-col1"> Maximum Throttle</td>
+                        <td id="db-max-throttle" class="db-inline-table-col2">x </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="db-table">
+                <thead>
+                    <tr>
+                        <th id="db-info" colspan="2" class="db-th"> INFORMATION </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="db-table-col1"> Supplier </td>
+                        <td id="db-supplier" class="db-table-col2"></td>
+                    </tr>
+                    <tr>
+                        <td class="db-table-col1"> Model</td>
+                        <td id="db-model" class="db-table-col2"> </td>
+                    </tr>
+                    <tr>
+                        <td class="db-table-col1"> Size</td>
+                        <td id="db-size" class="db-table-col2"> </td>
+                    </tr>
+                    <tr>
+                        <td class="db-table-col1"> Serial Number </td>
+                        <td id="db-serial" class="db-table-col2"> </td>
+                    </tr>
+                    <tr>
+                        <td class="db-table-col1"> Firmware </td>
+                        <td id="db-firmware" class="db-table-col2"> </td>
+                    </tr>
+                    <tr>
+                        <td class="db-table-col1"> Location </td>
+                        <td id="db-location" class="db-table-col2"> </td>
+                    </tr>
+                    <tr>
+                        <td class="db-table-col1"> Admin Commands </td>
+                        <td id="db-read-status" class="db-table-col2"> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!----------------------- Read Info Page -- Two lines, 1 block results table   ------------------------>
+    <div id="readinfo-container" style="display:none"  class="page-container"> 
+        <div class="top-line">
+            <div id="read-drive-info" class="drive-select"> </div>
+            <button id="read-info" class="btn">READ</button>
+            <button id="readinfo-logs" class="btn">LOGS</button>
+        </div>
+        <div class="bottom-line">
+            <button id="view-summary-info" class="combo-button-left btn-active">SUMMARY</button>
+            <button id="view-smart-info"   class="combo-button-middle ">SMART</button>
+            <button id="view-all-info"     class="combo-button-middle ">ALL</button>
+            <div id="combo-button-select" class="combo-select"> </div>
+            <input id="readinfo-search" class="info-search" type="text" spellcheck="false" placeholder="SEARCH...">
+
+        </div>
+        <div id="read-info-table-div"  class="table-div">   
+            <span  id="read-info-banner" style="display:none" class="page-banner">  </span>
+            <table id="read-info-table" class="results-table">
+                <thead>
+                    <tr>
+                        <th style="width:350px;" data-column="name" data-order="desc"> PARAMETER </th>
+                        <th style="width:250px;" data-column="value" data-order="desc"> VALUE </th>
+                        <th style="width:775px;" data-column="description" data-order="desc"> DESCRIPTION </th>
+                    </tr>
+                </thead>
+                <tbody id="read-info-table-body"></tbody>
+            </table>
+        </div>   
+    </div>
+
+    <!----------------------- Compare Info Page -- Two lines, banner, 1 block results table   ------------------------>
+    <div id="compareinfo-container" style="display:none"   class="page-container">
+        <div class="top-line">
+            <div id="compare-drive-info" class="drive-select"> </div>
+            <button id="compare-info" class="btn">COMPARE</button>
+            <button id="compare-all-btn" class="btn-white">ALL</button>
+            <button id="compare-logs-btn" class="btn">LOGS</button>
+        </div>
+        <div class="bottom-line">
+            <span  id="compare-ref-file" class="file-input default">Select file to compare... <i style="float:right;padding-left: 10px; padding-right:10px; line-height: 30px; font-size:16px; " class="fas fa-file"></i> </span>  
+
+            <input id="compare-search" class="info-search" type="text" spellcheck="false" placeholder="SEARCH...">
+
+        </div>
+        <div id="compare-table-div" class="table-div">
+            <span  id="compare-info-banner" style="display:none"   class="page-banner">  </span>
+            <Table id="compare-table" class="results-table">
+                <thead>
+                    <tr>
+                        <th style="width:300px" data-column="name" data-order="desc"> PARAMETER</th>
+                        <th style="width:300px" data-column="value" data-order="desc"> CURRENT VALUE</th>
+                        <th style="width:300px" data-column="compare-value" data-order="desc"> COMPARE FILE VALUE </th>
+                        <th style="width:325px;" data-column="delta" data-order="desc"> DIFFERENCE </th>
+                    </tr>
+                </thead>
+                <tbody id="compare-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!----------------------- Verify Info Page -- Two lines, banner, 1 block results table   ------------------------>
+    <div id="verifyinfo-container" style="display:none"   class="page-container">
+        <div class="top-line">
+            <div id="verify-drive-info" class="drive-select"> </div>
+            <button id="verify-info" class="btn">VERIFY</button>
+            <button id="verify-logs-btn" class="btn">LOGS</button>
+        </div>
+        <div class="bottom-line"> 
+            <span  id="verify-rules-file" class="file-input default">Select rules file to verify...<i style="float:right;padding-left: 10px; padding-right:10px; line-height: 30px; font-size:16px; " class="fas fa-file"></i>   </span>  
+            <input id="verify-search" class="info-search" type="text" spellcheck="false" placeholder="SEARCH...">
+
+        </div>
+        <div id="verify-table-div" class="table-div">
+            <span  id="verify-info-banner" style="display:none" class="page-banner">  </span>
+            <Table id="verify-table" class="results-table">
+                <thead>
+                    <tr>
+                        <th style="width:300px" data-column="name" data-order="desc"> PARAMETER</th>
+                        <th style="width:200px" data-column="value" data-order="desc"> CURRENT VALUE</th>
+                        <th style="width:400px;" data-column="rule" data-order="desc"> RULE </th>
+                    </tr>
+                </thead>
+                <tbody id="rule-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="./renderer.js">  </script>
+</html>
